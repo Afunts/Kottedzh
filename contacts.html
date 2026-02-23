@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Контакты — На холме</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <div class="page-bg" aria-hidden="true"></div>
+
+  <main class="container">
+    <section class="shell">
+      <header class="header">
+        <a class="brand" href="index.html">
+          <div class="logo">НХ</div>
+          <div><div>НА ХОЛМЕ</div><small>домики • природа • тишина</small></div>
+        </a>
+
+        <nav>
+          <a data-page="index.html" href="index.html">Главная</a>
+          <a data-page="catalog.html" href="catalog.html">Каталог</a>
+          <a data-page="about.html" href="about.html">Об отдыхе</a>
+          <a data-page="contacts.html" href="contacts.html">Контакты</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="btn btn-primary" type="button" data-open-booking>Забронировать</button>
+          <button class="btn nav-toggle" type="button" id="navToggle">Меню</button>
+        </div>
+      </header>
+
+      <div class="mobile-nav" id="mobileNav">
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="about.html">Об отдыхе</a>
+        <a href="contacts.html">Контакты</a>
+      </div>
+
+      <section class="section">
+        <div class="grid-2">
+          <div class="card">
+            <h2 style="margin:0 0 10px;">Связаться с нами</h2>
+            <div style="line-height:1.8; color: rgba(238,242,238,.86);">
+              Телефон: <a href="tel:+79990000000" style="text-decoration:underline; text-underline-offset:3px;">+7 (999) 000-00-00</a><br/>
+              Email: <a href="mailto:hello@naholme.ru" style="text-decoration:underline; text-underline-offset:3px;">hello@naholme.ru</a><br/>
+              WhatsApp/Telegram: +7 (999) 000-00-00
+            </div>
+            <div style="margin-top:12px;">
+              <button class="btn btn-primary" type="button" data-open-booking>Оставить заявку</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 style="margin:0 0 10px;">Локация</h2>
+            <div style="color: rgba(238,242,238,.86); line-height:1.6;">
+              Адрес (пример): Республика…, район…, 20 км от города.<br/>
+              Время работы: ежедневно 9:00–21:00
+            </div>
+            <div style="margin-top:12px; color: rgba(238,242,238,.70); font-size: 13px;">
+              Здесь можно вставить карту (Яндекс/Google).
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div><a href="policy.html">Политика</a></div>
+        <div style="color: rgba(238,242,238,.70); font-size: 13px;">© <span id="year"></span> «На холме»</div>
+      </footer>
+    </section>
+  </main>
+
+  <!-- MODAL -->
+  <div class="modal-backdrop" id="modal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modal-head">
+        <div><h3>Заявка на бронирование</h3><p>Выберите даты — увидите доступность и стоимость.</p></div>
+        <button class="modal-close" id="closeModal" aria-label="Закрыть">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <form class="form" id="bookingForm">
+          <div class="form-grid">
+            <div class="field" style="grid-column: 1 / -1;"><span>Домик</span><select name="houseId" id="houseSelect" required></select></div>
+            <div class="field"><span>Заезд</span><input name="checkIn" id="checkIn" type="date" required /></div>
+            <div class="field"><span>Выезд</span><input name="checkOut" id="checkOut" type="date" required /></div>
+            <div class="field"><span>Гостей</span><select name="guests" required><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div>
+            <div class="field"><span>Имя</span><input name="name" required /></div>
+            <div class="field" style="grid-column:1 / -1;"><span>Телефон</span><input name="phone" type="tel" required /></div>
+            <div class="field"><span>Мессенджер</span><select name="contactWay" required><option value="phone" selected>Телефон</option><option value="whatsapp">WhatsApp</option><option value="telegram">Telegram</option></select></div>
+            <div class="field"><span>Комментарий</span><textarea name="comment"></textarea></div>
+          </div>
+
+          <div class="cal-wrap">
+            <div class="cal-head">
+              <div class="cal-title" id="calTitle">Доступность</div>
+              <div class="cal-nav"><button class="btn" type="button" id="calPrev">←</button><button class="btn" type="button" id="calNext">→</button></div>
+            </div>
+            <div class="cal-grid" id="calGrid"></div>
+            <div class="price-box" id="priceBox">
+              <div class="price-row2"><span>Ночей</span><b id="nightsOut">—</b></div>
+              <div class="price-row2"><span>Базовая цена</span><b id="baseOut">—</b></div>
+              <div class="price-row2"><span>Коэффициенты (сезон/выходные)</span><b id="modsOut">—</b></div>
+              <div class="price-row2"><span class="price-total">Итого</span><b class="price-total" id="totalOut">—</b></div>
+              <div class="price-note" id="breakdownOut"></div>
+            </div>
+          </div>
+
+          <div class="form-actions"><button class="btn btn-primary" type="submit">Отправить</button></div>
+        </form>
+
+        <aside class="summary">
+          <div class="img" id="summaryImg"></div><div class="overlay"></div>
+          <div class="content">
+            <div style="display:flex; justify-content:space-between; gap:10px;"><h4 id="summaryTitle">—</h4><span class="pill" id="summaryPill">—</span></div>
+            <div class="meta2">
+              <div><span>Вместимость</span><b id="summaryGuests">—</b></div>
+              <div><span>Площадь</span><b id="summaryArea">—</b></div>
+              <div><span>Цена</span><b id="summaryPrice">—</b></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

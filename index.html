@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>На холме — бронирование коттеджей</title>
+  <meta name="description" content="Уютные домики на природе: шале, купола, у воды. Онлайн-заявка на бронирование." />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <div class="page-bg" aria-hidden="true"></div>
+
+  <main class="container">
+    <section class="shell">
+      <header class="header">
+        <a class="brand" href="index.html">
+          <div class="logo">НХ</div>
+          <div>
+            <div>НА ХОЛМЕ</div>
+            <small>домики • природа • тишина</small>
+          </div>
+        </a>
+
+        <nav aria-label="Навигация">
+          <a data-page="index.html" href="index.html">Главная</a>
+          <a data-page="catalog.html" href="catalog.html">Каталог</a>
+          <a data-page="about.html" href="about.html">Об отдыхе</a>
+          <a data-page="contacts.html" href="contacts.html">Контакты</a>
+        </nav>
+
+        <div class="header-actions">
+          <a class="btn" href="catalog.html">Смотреть домики</a>
+          <button class="btn btn-primary" type="button" data-open-booking>Забронировать</button>
+          <button class="btn nav-toggle" type="button" id="navToggle">Меню</button>
+        </div>
+      </header>
+
+      <div class="mobile-nav" id="mobileNav">
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="about.html">Об отдыхе</a>
+        <a href="contacts.html">Контакты</a>
+      </div>
+
+      <section class="hero">
+        <div class="hero-card">
+          <h1>НА ХОЛМЕ КАЖДЫЙ ДОМ —<br/>ЭТО ОТДЕЛЬНАЯ ИСТОРИЯ</h1>
+          <p>
+            Панорамные окна, камин, террасы и тишина. Выберите даты в календаре — увидите доступность и стоимость.
+          </p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn btn-primary" type="button" data-open-booking>Забронировать домик</button>
+            <a class="btn" href="catalog.html">Перейти в каталог</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section strip">
+        <div class="strip-row">
+          <div>
+            <h2>Популярные варианты</h2>
+            <div class="hint">Откройте карточку домика и забронируйте на нужные даты.</div>
+          </div>
+          <a class="btn" href="catalog.html">Все домики</a>
+        </div>
+      </section>
+
+      <section class="section listings">
+        <div id="list"></div>
+      </section>
+
+      <footer class="footer">
+        <div>
+          Тел.: <a href="tel:+79990000000">+7 (999) 000-00-00</a> •
+          Email: <a href="mailto:hello@naholme.ru">hello@naholme.ru</a> •
+          <a href="policy.html">Политика</a>
+        </div>
+        <div style="color: rgba(238,242,238,.70); font-size: 13px;">
+          © <span id="year"></span> «На холме»
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <!-- MODAL -->
+  <div class="modal-backdrop" id="modal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <div>
+          <h3 id="modalTitle">Заявка на бронирование</h3>
+          <p>Выберите домик и даты — мы свяжемся и подтвердим бронь.</p>
+        </div>
+        <button class="modal-close" id="closeModal" aria-label="Закрыть">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <form class="form" id="bookingForm">
+          <div class="form-grid">
+            <div class="field" style="grid-column: 1 / -1;">
+              <span>Домик</span>
+              <select name="houseId" id="houseSelect" required></select>
+            </div>
+
+            <div class="field">
+              <span>Заезд</span>
+              <input name="checkIn" id="checkIn" type="date" required />
+            </div>
+
+            <div class="field">
+              <span>Выезд</span>
+              <input name="checkOut" id="checkOut" type="date" required />
+            </div>
+
+            <div class="field">
+              <span>Гостей</span>
+              <select name="guests" required>
+                <option value="1">1</option>
+                <option value="2" selected>2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <span>Имя</span>
+              <input name="name" type="text" placeholder="Например, Анна" required />
+            </div>
+
+            <div class="field" style="grid-column:1 / -1;">
+              <span>Телефон</span>
+              <input name="phone" type="tel" placeholder="+7 (___) ___-__-__" required />
+            </div>
+
+            <div class="field">
+              <span>Мессенджер</span>
+              <select name="contactWay" required>
+                <option value="phone" selected>Телефон</option>
+                <option value="whatsapp">WhatsApp</option>
+                <option value="telegram">Telegram</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <span>Комментарий</span>
+              <textarea name="comment" placeholder="Пожелания: купель, поздний заезд, питомец..."></textarea>
+            </div>
+          </div>
+
+          <!-- Calendar + Pricing -->
+          <div class="cal-wrap">
+            <div class="cal-head">
+              <div class="cal-title" id="calTitle">Доступность</div>
+              <div class="cal-nav">
+                <button class="btn" type="button" id="calPrev">←</button>
+                <button class="btn" type="button" id="calNext">→</button>
+              </div>
+            </div>
+
+            <div class="cal-grid" id="calGrid"></div>
+
+            <div class="price-box" id="priceBox">
+              <div class="price-row2">
+                <span>Ночей</span><b id="nightsOut">—</b>
+              </div>
+              <div class="price-row2">
+                <span>Базовая цена</span><b id="baseOut">—</b>
+              </div>
+              <div class="price-row2">
+                <span>Коэффициенты (сезон/выходные)</span><b id="modsOut">—</b>
+              </div>
+              <div class="price-row2">
+                <span class="price-total">Итого</span><b class="price-total" id="totalOut">—</b>
+              </div>
+              <div class="price-note" id="breakdownOut"></div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-primary" type="submit">Отправить</button>
+          </div>
+
+          <div style="margin-top:10px; color: rgba(238,242,238,.70); font-size: 12.5px; line-height:1.45;">
+            Нажимая «Отправить», вы соглашаетесь с <a href="policy.html" style="text-decoration:underline; text-underline-offset:3px;">политикой</a>.
+          </div>
+        </form>
+
+        <aside class="summary" aria-label="Сводка">
+          <div class="img" id="summaryImg"></div>
+          <div class="overlay"></div>
+          <div class="content">
+            <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px;">
+              <h4 id="summaryTitle">—</h4>
+              <span class="pill" id="summaryPill">—</span>
+            </div>
+            <div class="meta2">
+              <div><span>Вместимость</span><b id="summaryGuests">—</b></div>
+              <div><span>Площадь</span><b id="summaryArea">—</b></div>
+              <div><span>Цена</span><b id="summaryPrice">—</b></div>
+            </div>
+            <div style="margin-top:auto; color: rgba(238,242,238,.76); font-size: 12.8px; line-height:1.45;">
+              Итоговую стоимость подтвердим после проверки дат (праздники/акции могут отличаться).
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
