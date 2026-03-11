@@ -56,7 +56,7 @@
       tags: ["прозрачная крыша", "обогрев", "мангал", "Wi-Fi"],
       amenities: ["Панорамная/прозрачная крыша", "Обогрев", "Wi-Fi", "Парковка"],
       images: [
-        "https://ecofilin.ru/wp-content/uploads/2025/06/glemping-v-podmoskove-ecofilin-1.jpg?auto=format&amp;fit=crop&amp;w=2000&amp;q=80",
+        "https://69b16fa5ece241a369f2805c.imgix.net/01-3.jpg",
         "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=2000&q=80",
         "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=2000&q=80"
       ],
